@@ -1,15 +1,36 @@
-import { useState } from 'react'
-import viteLogo from '/vite.svg'
+import { useContent } from './hooks/useContent'
+import ContentList from "./components/ContentList";
+import EditorForm from "./components/EditorForm"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {
+    items,
+    setFilter,
+    selectedItem,
+    setSelectedId,
+    updateItem
+  } = useContent();
 
   return (
-    <>
-      <div>
-        welcome
-      </div>
-    </>
+    <div className="layout">
+      <aside>
+        <select onChange={e => setFilter(e.target.value)}>
+          <option value="all">All</option>
+          <option value="draft">Draft</option>
+          <option value="published">Published</option>
+        </select>
+        <ContentList items={items} onSelect={setSelectedId} />
+      </aside>
+
+      <main>
+        <EditorForm item={selectedItem} onSave={updateItem} />
+
+        <div className="accordion">
+          <div className="accordion__header">Preview</div>
+          <div className="accordion__body">Legacy jQuery accordion</div>
+        </div>
+      </main>
+    </div>
   )
 }
 
