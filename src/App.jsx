@@ -27,8 +27,16 @@ function App() {
 
         <div className="accordion">
           <div className="accordion__header">Preview</div>
-          <div className="accordion__body">Legacy jQuery accordion</div>
-        </div>
+          <div className="accordion__body">
+            {selectedItem ? (
+              <>
+                <h3>{selectedItem.title}</h3>
+                <p>{selectedItem.body}</p>
+              </>
+            ) : (
+              <em>No selection</em>
+            )}
+          </div>        </div>
       </main>
     </div>
   )

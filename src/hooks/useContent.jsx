@@ -10,6 +10,12 @@ export function useContent() {
         setItems(data)
     }, [])
 
+    useEffect(() => {
+        if (items.length && selectedId == null) {
+            setSelectedId(items[0].id)
+        }
+    }, [items, selectedId])
+
     const filteredItems = useMemo(() => {
         if (filter === "all") return items;
         return items.filter(i => i.status === filter);
